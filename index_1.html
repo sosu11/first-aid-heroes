@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Aid Heroes — أبطال الإسعافات الأوّليّة</title>
+<meta name="description" content="A friendly first aid guide for kids in English and Arabic. Learn what to do for cuts, bruises, nosebleeds, burns, choking, and fevers — and when to get a grown-up.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&family=Cairo:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FFFBF2; --ink:#22304d; --ink-soft:#54617c; --card:#ffffff; --line:#eadfce;
+    --cuts:#ff6b6b; --bruise:#4d8fe8; --nose:#e8617a; --burn:#ff9f45; --choke:#8e7dff; --fever:#25b7a6;
+    --alert-bg:#fff0ec; --alert-ink:#c0392b; --alert-line:#ffc9bd; --emergency:#e23c34;
+    --radius:22px; --shadow:0 10px 26px rgba(34,48,77,.10); --shadow-sm:0 4px 12px rgba(34,48,77,.08);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Nunito", ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-size:18px; line-height:1.55; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:"Baloo 2", ui-rounded, "Segoe UI", system-ui, sans-serif; line-height:1.15; margin:0;}
+  p{margin:0 0 .7em;}
+  .wrap{max-width:860px; margin:0 auto; padding:0 18px;}
+  a{color:inherit;} a.card-link{text-decoration:none;}
+
+  /* ---------- language bar ---------- */
+  .langbar{position:sticky; top:0; z-index:50; background:#fffdf7; border-bottom:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; gap:8px; padding:7px 12px;}
+  .langbar .lb-label{font-family:"Baloo 2",sans-serif; font-weight:700; color:var(--ink-soft); font-size:.82rem; margin-inline-end:2px;}
+  .seg{display:inline-flex; background:#f1ece1; border-radius:999px; padding:3px;}
+  .seg button{border:0; background:transparent; cursor:pointer; font-weight:800; font-size:.92rem;
+    padding:6px 16px; border-radius:999px; color:var(--ink-soft); font-family:inherit; min-height:36px;}
+  .seg button[aria-pressed="true"]{background:var(--fever); color:#fff; box-shadow:var(--shadow-sm);}
+  .seg button:focus-visible{outline:3px solid var(--bruise); outline-offset:2px;}
+  .seg button.ar-btn{font-family:"Cairo",sans-serif;}
+
+  /* language visibility */
+  .ar{display:none;}
+  html.ar-active .en{display:none;}
+  html.ar-active .ar{display:inline;}
+  html.ar-active{font-family:"Cairo","Nunito",ui-rounded,system-ui,sans-serif;}
+  html.ar-active h1, html.ar-active h2, html.ar-active h3{font-family:"Cairo","Baloo 2",sans-serif;}
+
+  /* ---------- emergency ribbon ---------- */
+  .ribbon{background:var(--emergency); color:#fff; text-align:center;
+    font-family:"Baloo 2", sans-serif; font-weight:700; font-size:1rem; padding:9px 14px;}
+  html.ar-active .ribbon{font-family:"Cairo",sans-serif;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:34px 0 12px;}
+  .hero-inner{display:flex; align-items:center; gap:22px; flex-wrap:wrap; justify-content:center; text-align:center;}
+  .mascot{flex:0 0 auto;}
+  .hero-text{max-width:560px;}
+  .eyebrow{display:inline-block; font-family:"Baloo 2",sans-serif; font-weight:700; color:var(--burn);
+    text-transform:uppercase; letter-spacing:2px; font-size:.8rem; background:#fff4e6; padding:5px 14px; border-radius:999px; margin-bottom:14px;}
+  html.ar-active .eyebrow{font-family:"Cairo",sans-serif; letter-spacing:0;}
+  .hero h1{font-size:clamp(2.3rem,7vw,3.5rem); font-weight:800; letter-spacing:-.5px;}
+  .hero h1 .hl{color:var(--cuts);}
+  .hero .lede{font-size:1.15rem; color:var(--ink-soft); margin-top:12px; font-weight:600;}
+
+  /* ---------- golden rules ---------- */
+  .rules{margin:26px 0 6px;}
+  .rules h2{font-size:1.4rem; text-align:center; margin-bottom:16px;}
+  .rules h2 em{font-style:normal; color:var(--fever);}
+  .rule-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .rule{background:var(--card); border:2px solid var(--line); border-radius:18px; padding:16px 12px; text-align:center; box-shadow:var(--shadow-sm);}
+  .rule .rn{width:34px;height:34px;border-radius:50%; display:flex;align-items:center;justify-content:center;
+    margin:0 auto 8px; font-family:"Baloo 2",sans-serif; font-weight:800; color:#fff; font-size:1.05rem; background:var(--fever);}
+  .rule:nth-child(2) .rn{background:var(--bruise);}
+  .rule:nth-child(3) .rn{background:var(--burn);}
+  .rule:nth-child(4) .rn{background:var(--emergency);}
+  .rule b{font-family:"Baloo 2",sans-serif; font-size:1rem; display:block; margin-bottom:2px;}
+  html.ar-active .rule b{font-family:"Cairo",sans-serif;}
+  .rule small{color:var(--ink-soft); font-size:.85rem; line-height:1.35; display:block;}
+
+  /* ---------- topic picker ---------- */
+  .pick{margin:34px 0 8px;}
+  .pick h2{text-align:center; font-size:1.4rem; margin-bottom:6px;}
+  .pick .sub{text-align:center; color:var(--ink-soft); margin-bottom:18px; font-weight:600;}
+  .tiles{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+  .tile{background:var(--card); border-radius:20px; border:2px solid var(--line); padding:20px 12px; text-align:center;
+    box-shadow:var(--shadow-sm); transition:transform .15s ease, box-shadow .15s ease; display:block; border-bottom-width:5px;}
+  .tile:hover, .card-link:focus-visible .tile{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .tile .emoji{font-size:2.5rem; display:block; line-height:1;}
+  .tile b{font-family:"Baloo 2",sans-serif; font-size:1.02rem; display:block; margin-top:10px;}
+  html.ar-active .tile b{font-family:"Cairo",sans-serif;}
+  .t-cuts{border-bottom-color:var(--cuts);} .t-bruise{border-bottom-color:var(--bruise);}
+  .t-nose{border-bottom-color:var(--nose);} .t-burn{border-bottom-color:var(--burn);}
+  .t-choke{border-bottom-color:var(--choke);} .t-fever{border-bottom-color:var(--fever);}
+
+  /* ---------- topic sections ---------- */
+  .topics{margin:40px 0 10px;}
+  .topic{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:26px;
+    overflow:hidden; scroll-margin-top:58px; border:1px solid var(--line);}
+  .topic-head{display:flex; align-items:center; gap:16px; padding:20px 22px; color:#fff;}
+  .topic-head .ic{font-size:2.1rem; background:rgba(255,255,255,.22); width:60px;height:60px;border-radius:16px;
+    display:flex;align-items:center;justify-content:center; flex:0 0 auto;}
+  .topic-head h3{font-size:1.55rem; font-weight:800;}
+  .topic-head .whatis{font-size:.98rem; opacity:.96; font-weight:600; margin-top:2px;}
+  .c-cuts{background:var(--cuts);} .c-bruise{background:var(--bruise);} .c-nose{background:var(--nose);}
+  .c-burn{background:var(--burn);} .c-choke{background:var(--choke);} .c-fever{background:var(--fever);}
+
+  .topic-body{padding:20px 22px 24px;}
+  .steps-title{font-family:"Baloo 2",sans-serif; font-weight:700; font-size:1.12rem; margin:2px 0 12px; display:flex; align-items:center; gap:8px;}
+  html.ar-active .steps-title{font-family:"Cairo",sans-serif;}
+  .steps{list-style:none; margin:0 0 4px; padding:0; counter-reset:s;}
+  .steps li{position:relative; padding:6px 0 14px 52px; counter-increment:s; font-weight:600;}
+  .steps li::before{content:counter(s); position:absolute; left:0; top:2px; width:36px;height:36px;border-radius:50%; color:#fff;
+    display:flex;align-items:center;justify-content:center; font-family:"Baloo 2",sans-serif; font-weight:800; font-size:1.05rem;}
+  .topic[data-c=cuts] .steps li::before{background:var(--cuts);}
+  .topic[data-c=bruise] .steps li::before{background:var(--bruise);}
+  .topic[data-c=nose] .steps li::before{background:var(--nose);}
+  .topic[data-c=burn] .steps li::before{background:var(--burn);}
+  .topic[data-c=choke] .steps li::before{background:var(--choke);}
+  .topic[data-c=fever] .steps li::before{background:var(--fever);}
+  .steps li:not(:last-child)::after{content:""; position:absolute; left:17px; top:40px; bottom:6px; width:3px; background:var(--line); border-radius:2px;}
+
+  .note{background:#f6f4ef; border-radius:14px; padding:12px 16px; margin-top:14px; font-size:.95rem; color:var(--ink-soft); font-weight:600;}
+  .note b{color:var(--ink);}
+  .alert{background:var(--alert-bg); border:2px solid var(--alert-line); border-radius:16px; padding:14px 16px; margin-top:16px;}
+  .alert .lbl{display:flex; align-items:center; gap:8px; font-family:"Baloo 2",sans-serif; font-weight:800; color:var(--alert-ink); font-size:1.05rem; margin-bottom:4px;}
+  html.ar-active .alert .lbl{font-family:"Cairo",sans-serif;}
+  .alert p{margin:0; color:#7a3a30; font-weight:600; font-size:.97rem;}
+
+  .fork{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:0 0 18px;}
+  .fork div{border-radius:14px; padding:12px 14px; font-weight:700; font-size:.95rem;}
+  .fork .yes{background:#e9f8ef; color:#1f8a52; border:2px solid #bfe9cf;}
+  .fork .no{background:var(--alert-bg); color:var(--alert-ink); border:2px solid var(--alert-line);}
+  .fork b{font-family:"Baloo 2",sans-serif; display:block; font-size:1.05rem; margin-bottom:3px;}
+  html.ar-active .fork b{font-family:"Cairo",sans-serif;}
+
+  /* ---------- always box ---------- */
+  .always{background:#fff; border:3px dashed var(--emergency); border-radius:var(--radius); padding:22px; margin:34px 0; text-align:center;}
+  .always h2{color:var(--emergency); font-size:1.5rem; margin-bottom:10px;}
+  .always ul{text-align:left; max-width:560px; margin:10px auto 0; padding-left:22px; font-weight:600;}
+  .always li{margin-bottom:6px;}
+  .always .big{margin-top:14px;font-weight:800;color:var(--emergency);font-family:'Baloo 2',sans-serif;font-size:1.1rem;}
+  html.ar-active .always .big{font-family:'Cairo',sans-serif;}
+
+  /* ---------- footer ---------- */
+  footer{padding:26px 0 60px; text-align:center; color:var(--ink-soft);}
+  footer .heart{color:var(--cuts); font-weight:800; font-family:"Baloo 2",sans-serif;}
+  html.ar-active footer .heart{font-family:"Cairo",sans-serif;}
+  .disclaim{background:#f6f4ef; border-radius:16px; padding:16px 18px; font-size:.9rem; max-width:640px; margin:0 auto 20px; line-height:1.5;}
+  .totop{display:inline-block; margin-top:8px; text-decoration:none; font-family:"Baloo 2",sans-serif; font-weight:700;
+    color:var(--fever); background:#e7f7f4; padding:8px 18px; border-radius:999px;}
+  html.ar-active .totop{font-family:"Cairo",sans-serif;}
+  a:focus-visible, .totop:focus-visible{outline:3px solid var(--bruise); outline-offset:3px;}
+
+  /* ---------- RTL adjustments ---------- */
+  [dir="rtl"] .topic-body, [dir="rtl"] .note, [dir="rtl"] .alert, [dir="rtl"] .disclaim, [dir="rtl"] .whatis{text-align:right;}
+  [dir="rtl"] .steps li{padding:6px 52px 14px 0;}
+  [dir="rtl"] .steps li::before{left:auto; right:0;}
+  [dir="rtl"] .steps li:not(:last-child)::after{left:auto; right:17px;}
+  [dir="rtl"] .always ul{text-align:right; padding-left:0; padding-right:22px;}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:680px){
+    body{font-size:17px;}
+    .rule-grid{grid-template-columns:repeat(2,1fr);}
+    .tiles{grid-template-columns:repeat(2,1fr);}
+    .topic-head{flex-wrap:wrap; gap:12px; padding:18px;}
+    .topic-head .ic{width:52px;height:52px;font-size:1.8rem;}
+    .topic-head h3{font-size:1.35rem;}
+    .fork{grid-template-columns:1fr;}
+    .topic-body{padding:18px;}
+  }
+  @media (max-width:380px){ .rule-grid{grid-template-columns:1fr;} .tiles{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="langbar">
+  <span class="lb-label"><span class="en">Language</span><span class="ar">اللغة</span></span>
+  <div class="seg" role="group" aria-label="Choose language">
+    <button type="button" data-setlang="en" aria-pressed="true" onclick="setLang('en')">English</button>
+    <button type="button" class="ar-btn" data-setlang="ar" aria-pressed="false" onclick="setLang('ar')">العربية</button>
+  </div>
+</div>
+
+<div class="ribbon">🚑 <span class="en">Big emergency? Tell a grown-up right away and call 911.</span><span class="ar">حالة طارئة كبيرة؟ أخبر شخصًا بالغًا فورًا واتصل بالطوارئ (911).</span></div>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="mascot" aria-hidden="true">
+      <svg width="118" height="118" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img">
+        <circle cx="60" cy="60" r="58" fill="#fff2ec"/>
+        <path d="M60 100 C18 74 22 40 42 34 C54 30 60 42 60 42 C60 42 66 30 78 34 C98 40 102 74 60 100 Z" fill="#ff6b6b"/>
+        <g transform="rotate(28 60 60)">
+          <rect x="38" y="52" width="44" height="18" rx="9" fill="#ffd8a8" stroke="#f0b878" stroke-width="2"/>
+          <circle cx="49" cy="61" r="1.6" fill="#e39a52"/><circle cx="56" cy="61" r="1.6" fill="#e39a52"/>
+          <circle cx="64" cy="61" r="1.6" fill="#e39a52"/><circle cx="71" cy="61" r="1.6" fill="#e39a52"/>
+          <rect x="55" y="55" width="10" height="12" rx="3" fill="#fff"/>
+        </g>
+        <circle cx="49" cy="55" r="3.4" fill="#22304d"/><circle cx="71" cy="55" r="3.4" fill="#22304d"/>
+        <path d="M50 74 Q60 82 70 74" stroke="#22304d" stroke-width="3.4" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <span class="eyebrow"><span class="en">First Aid Heroes</span><span class="ar">أبطال الإسعافات الأوّليّة</span></span>
+      <h1><span class="en">You can be a <span class="hl">helper</span>.</span><span class="ar">يمكنك أن تكون <span class="hl">مُساعِدًا</span>.</span></h1>
+      <p class="lede"><span class="en">When someone gets hurt, a calm kid who knows what to do makes a real difference. Here's your guide — learn it, and you're ready to help.</span><span class="ar">عندما يتأذّى أحدهم، فإنّ طفلًا هادئًا يعرف ما يفعل يُحدث فرقًا حقيقيًّا. هذا دليلك — تعلّمه، وتكون جاهزًا للمساعدة.</span></p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- GOLDEN RULES -->
+  <section class="rules" aria-labelledby="rules-h">
+    <h2 id="rules-h"><span class="en">The 4 <em>Golden Rules</em></span><span class="ar">القواعد <em>الذهبية</em> الأربع</span></h2>
+    <div class="rule-grid">
+      <div class="rule"><div class="rn">1</div><b><span class="en">Stay calm</span><span class="ar">ابقَ هادئًا</span></b><small><span class="en">Take a deep breath. You've got this.</span><span class="ar">خذ نفسًا عميقًا. أنت تستطيع.</span></small></div>
+      <div class="rule"><div class="rn">2</div><b><span class="en">Clean hands</span><span class="ar">نظّف يديك</span></b><small><span class="en">Wash up or use hand sanitizer first.</span><span class="ar">اغسل يديك أو استخدم المعقّم أولًا.</span></small></div>
+      <div class="rule"><div class="rn">3</div><b><span class="en">Tell a grown-up</span><span class="ar">أخبر شخصًا بالغًا</span></b><small><span class="en">A teacher, parent, or adult you trust.</span><span class="ar">معلّمًا أو أحد الوالدين أو شخصًا تثق به.</span></small></div>
+      <div class="rule"><div class="rn">4</div><b><span class="en">Call 911</span><span class="ar">اتصل بالطوارئ 911</span></b><small><span class="en">For any big emergency, get help fast.</span><span class="ar">لأيّ حالة طارئة كبيرة، اطلب المساعدة بسرعة.</span></small></div>
+    </div>
+  </section>
+
+  <!-- TOPIC PICKER -->
+  <section class="pick" aria-labelledby="pick-h">
+    <h2 id="pick-h"><span class="en">What do you want to learn?</span><span class="ar">ماذا تريد أن تتعلّم؟</span></h2>
+    <p class="sub"><span class="en">Tap a topic to jump to it.</span><span class="ar">اضغط على موضوع للانتقال إليه.</span></p>
+    <div class="tiles">
+      <a class="card-link" href="#cuts"><div class="tile t-cuts"><span class="emoji">🩹</span><b><span class="en">Cuts &amp; Scrapes</span><span class="ar">الجروح والخدوش</span></b></div></a>
+      <a class="card-link" href="#bruises"><div class="tile t-bruise"><span class="emoji">💙</span><b><span class="en">Bruises &amp; Sprains</span><span class="ar">الكدمات والالتواءات</span></b></div></a>
+      <a class="card-link" href="#nosebleeds"><div class="tile t-nose"><span class="emoji">👃</span><b><span class="en">Nosebleeds</span><span class="ar">نزيف الأنف</span></b></div></a>
+      <a class="card-link" href="#burns"><div class="tile t-burn"><span class="emoji">🔥</span><b><span class="en">Burns &amp; Sunburn</span><span class="ar">الحروق وحروق الشمس</span></b></div></a>
+      <a class="card-link" href="#choking"><div class="tile t-choke"><span class="emoji">🆘</span><b><span class="en">Choking</span><span class="ar">الاختناق</span></b></div></a>
+      <a class="card-link" href="#fever"><div class="tile t-fever"><span class="emoji">🌡️</span><b><span class="en">Fever &amp; Temperature</span><span class="ar">الحرارة والحُمّى</span></b></div></a>
+    </div>
+  </section>
+
+  <!-- TOPICS -->
+  <section class="topics">
+
+    <!-- CUTS -->
+    <article class="topic" id="cuts" data-c="cuts">
+      <div class="topic-head c-cuts">
+        <div class="ic" aria-hidden="true">🩹</div>
+        <div><h3><span class="en">Cuts &amp; Scrapes</span><span class="ar">الجروح والخدوش</span></h3>
+        <div class="whatis"><span class="en">The skin gets broken and it might bleed a little.</span><span class="ar">تنكسر البشرة وقد تنزف قليلًا.</span></div></div>
+      </div>
+      <div class="topic-body">
+        <div class="steps-title">👉 <span class="en">What to do</span><span class="ar">ماذا تفعل؟</span></div>
+        <ol class="steps">
+          <li><span class="en">Wash your hands first if you can.</span><span class="ar">اغسل يديك أولًا إن استطعت.</span></li>
+          <li><span class="en">Rinse the cut gently with clean water to wash out any dirt.</span><span class="ar">اشطف الجرح برفق بماء نظيف لإزالة أيّ أوساخ.</span></li>
+          <li><span class="en">Press with a clean cloth or tissue until the bleeding slows down.</span><span class="ar">اضغط بقطعة قماش نظيفة أو منديل حتى يقلّ النزيف.</span></li>
+          <li><span class="en">Cover it with a bandage to keep it clean.</span><span class="ar">غطِّ الجرح بلصقة ليبقى نظيفًا.</span></li>
+        </ol>
+        <div class="alert">
+          <div class="lbl">🛑 <span class="en">Get a grown-up if…</span><span class="ar">اطلب مساعدة شخص بالغ إذا…</span></div>
+          <p><span class="en">the cut is deep or big, it won't stop bleeding, it was made by something dirty or rusty, or something is stuck in it.</span><span class="ar">كان الجرح عميقًا أو كبيرًا، أو لم يتوقّف النزيف، أو حدث بشيء متّسخ أو صدئ، أو بقي شيء عالقًا فيه.</span></p>
+        </div>
+        <div class="note"><b><span class="en">Cool fact:</span><span class="ar">معلومة ممتعة:</span></b> <span class="en">Your body makes a scab like a tiny shield to protect the cut while it heals. Try not to pick it!</span><span class="ar">يصنع جسمك قشرة كدرع صغير لحماية الجرح أثناء شفائه. حاول ألّا تنزعها!</span></div>
+      </div>
+    </article>
+
+    <!-- BRUISES -->
+    <article class="topic" id="bruises" data-c="bruise">
+      <div class="topic-head c-bruise">
+        <div class="ic" aria-hidden="true">💙</div>
+        <div><h3><span class="en">Bruises &amp; Minor Sprains</span><span class="ar">الكدمات والالتواءات البسيطة</span></h3>
+        <div class="whatis"><span class="en">A bump breaks tiny blood vessels (a bruise), or a joint gets twisted (a sprain).</span><span class="ar">ضربة تكسر أوعية دموية صغيرة (كدمة)، أو يلتوي مفصل (التواء).</span></div></div>
+      </div>
+      <div class="topic-body">
+        <div class="steps-title">👉 <span class="en">What to do — remember R.I.C.E.</span><span class="ar">ماذا تفعل؟ (راحة، ثلج، ضغط، رفع)</span></div>
+        <ol class="steps">
+          <li><b><span class="en">Rest</span><span class="ar">الراحة</span></b> — <span class="en">stop and take a break from using it.</span><span class="ar">توقّف وخذ استراحة من استخدامه.</span></li>
+          <li><b><span class="en">Ice</span><span class="ar">الثلج</span></b> — <span class="en">hold a cold pack (or ice in a cloth) on it for about 20 minutes. Never put ice straight on bare skin.</span><span class="ar">ضع كمّادة باردة (أو ثلجًا داخل قماش) نحو ٢٠ دقيقة. لا تضع الثلج مباشرة على الجلد.</span></li>
+          <li><b><span class="en">Compress</span><span class="ar">الضغط</span></b> — <span class="en">a grown-up can wrap it snugly with a bandage.</span><span class="ar">يمكن لشخص بالغ أن يلفّه برباط بإحكام معتدل.</span></li>
+          <li><b><span class="en">Elevate</span><span class="ar">الرفع</span></b> — <span class="en">prop it up on a pillow, higher than your heart.</span><span class="ar">ارفعه على وسادة أعلى من مستوى قلبك.</span></li>
+        </ol>
+        <div class="alert">
+          <div class="lbl">🛑 <span class="en">Get a grown-up if…</span><span class="ar">اطلب مساعدة شخص بالغ إذا…</span></div>
+          <p><span class="en">it hurts a lot, it's very swollen, it looks bent or crooked, or you can't move it or walk on it.</span><span class="ar">كان الألم شديدًا، أو التورّم كبيرًا، أو بدا معوجًّا، أو لم تستطع تحريكه أو المشي عليه.</span></p>
+        </div>
+        <div class="note"><b><span class="en">Cool fact:</span><span class="ar">معلومة ممتعة:</span></b> <span class="en">A bruise changes color as it heals — purple, then greenish, then yellow. That's your body cleaning up!</span><span class="ar">تتغيّر ألوان الكدمة أثناء الشفاء: بنفسجيّة ثم خضراء ثم صفراء. هذا جسمك ينظّف المكان!</span></div>
+      </div>
+    </article>
+
+    <!-- NOSEBLEEDS -->
+    <article class="topic" id="nosebleeds" data-c="nose">
+      <div class="topic-head c-nose">
+        <div class="ic" aria-hidden="true">👃</div>
+        <div><h3><span class="en">Nosebleeds</span><span class="ar">نزيف الأنف</span></h3>
+        <div class="whatis"><span class="en">A tiny blood vessel inside the nose pops. It looks like a lot, but it's usually not serious.</span><span class="ar">ينفجر وعاء دموي صغير داخل الأنف. يبدو الدم كثيرًا لكنّه غالبًا غير خطير.</span></div></div>
+      </div>
+      <div class="topic-body">
+        <div class="steps-title">👉 <span class="en">What to do</span><span class="ar">ماذا تفعل؟</span></div>
+        <ol class="steps">
+          <li><span class="en">Sit up and lean forward a little. <b>Don't tip your head back!</b></span><span class="ar">اجلس وانحنِ إلى الأمام قليلًا. <b>لا تُرجِع رأسك إلى الخلف!</b></span></li>
+          <li><span class="en">Pinch the soft part of your nose shut.</span><span class="ar">اقرِص الجزء الليّن من أنفك.</span></li>
+          <li><span class="en">Hold for 10 minutes and breathe through your mouth.</span><span class="ar">استمرّ عشر دقائق وتنفّس من فمك.</span></li>
+          <li><span class="en">Gently let go. Try not to blow or pick your nose after.</span><span class="ar">اترك أنفك برفق. حاول ألّا تنفخه أو تعبث به بعد ذلك.</span></li>
+        </ol>
+        <div class="alert">
+          <div class="lbl">🛑 <span class="en">Get a grown-up if…</span><span class="ar">اطلب مساعدة شخص بالغ إذا…</span></div>
+          <p><span class="en">it doesn't stop after 10–15 minutes, it started after a hard bump to the head, or there's a whole lot of blood.</span><span class="ar">لم يتوقّف بعد ١٠ إلى ١٥ دقيقة، أو بدأ بعد ضربة قويّة على الرأس، أو كان الدم كثيرًا جدًّا.</span></p>
+        </div>
+        <div class="note"><b><span class="en">Why lean forward?</span><span class="ar">لماذا الانحناء إلى الأمام؟</span></b> <span class="en">Leaning back sends blood down your throat and can make your tummy feel yucky. Forward is best.</span><span class="ar">الانحناء إلى الخلف يُنزل الدم إلى الحلق وقد يُسبّب الغثيان. الأمام هو الأفضل.</span></div>
+      </div>
+    </article>
+
+    <!-- BURNS -->
+    <article class="topic" id="burns" data-c="burn">
+      <div class="topic-head c-burn">
+        <div class="ic" aria-hidden="true">🔥</div>
+        <div><h3><span class="en">Minor Burns &amp; Sunburn</span><span class="ar">الحروق البسيطة وحروق الشمس</span></h3>
+        <div class="whatis"><span class="en">Something hot — or too much sun — hurts the skin. It may turn red and sting.</span><span class="ar">شيء ساخن — أو كثرة الشمس — يؤذي الجلد. قد يحمرّ ويؤلم.</span></div></div>
+      </div>
+      <div class="topic-body">
+        <div class="steps-title">👉 <span class="en">What to do</span><span class="ar">ماذا تفعل؟</span></div>
+        <ol class="steps">
+          <li><span class="en">Get away from whatever is hot, right away.</span><span class="ar">ابتعد فورًا عن أيّ شيء ساخن.</span></li>
+          <li><span class="en">Cool it under cool (not icy) running water for about 20 minutes.</span><span class="ar">برّده تحت ماء جارٍ فاتر (غير مثلّج) نحو ٢٠ دقيقة.</span></li>
+          <li><span class="en">Do <b>not</b> put ice, butter, toothpaste, or creams on a fresh burn.</span><span class="ar"><b>لا</b> تضع ثلجًا أو زبدة أو معجون أسنان أو كريمات على الحرق الطازج.</span></li>
+          <li><span class="en">Cover it loosely with a clean cloth.</span><span class="ar">غطّه برفق بقطعة قماش نظيفة.</span></li>
+        </ol>
+        <div class="note"><b><span class="en">For sunburn:</span><span class="ar">لحروق الشمس:</span></b> <span class="en">get into the shade, sip water, and cool the skin. Aloe vera helps it feel better. <b>Best trick of all:</b> sunscreen and a hat stop sunburn before it starts! ☀️</span><span class="ar">اذهب إلى الظلّ، واشرب الماء، وبرّد الجلد. يساعد جل الصبّار (الألوفيرا) على الشعور بتحسّن. <b>أفضل حيلة:</b> واقي الشمس والقبّعة يمنعان حروق الشمس قبل أن تبدأ! ☀️</span></div>
+        <div class="alert">
+          <div class="lbl">🛑 <span class="en">Get a grown-up if…</span><span class="ar">اطلب مساعدة شخص بالغ إذا…</span></div>
+          <p><span class="en">the burn blisters, is bigger than your hand, is on the face, hands, or private areas, or came from fire, chemicals, or electricity.</span><span class="ar">ظهرت فقاعات، أو كان أكبر من كفّ يدك، أو على الوجه أو اليدين أو الأماكن الحسّاسة، أو نتج عن نار أو مواد كيميائية أو كهرباء.</span></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- CHOKING -->
+    <article class="topic" id="choking" data-c="choke">
+      <div class="topic-head c-choke">
+        <div class="ic" aria-hidden="true">🆘</div>
+        <div><h3><span class="en">Choking</span><span class="ar">الاختناق</span></h3>
+        <div class="whatis"><span class="en">Food or an object gets stuck and blocks someone's breathing. This one is serious — act fast.</span><span class="ar">ينحشر طعام أو جسم ويسدّ تنفّس الشخص. هذا الأمر خطير — تصرّف بسرعة.</span></div></div>
+      </div>
+      <div class="topic-body">
+        <div class="steps-title">👀 <span class="en">First, look — can they cough, talk, or make noise?</span><span class="ar">انظر أولًا: هل يستطيع أن يسعل أو يتكلّم أو يُصدر صوتًا؟</span></div>
+        <div class="fork">
+          <div class="yes"><b><span class="en">YES 😮‍💨</span><span class="ar">نعم 😮‍💨</span></b><span class="en">They're getting some air. Stay with them and tell them to keep coughing hard.</span><span class="ar">الهواء يصل إليه. ابقَ معه وقل له أن يستمرّ بالسعال بقوّة.</span></div>
+          <div class="no"><b><span class="en">NO 🚨</span><span class="ar">لا 🚨</span></b><span class="en">They can't cough, talk, or breathe (or they grab their throat). This is an emergency!</span><span class="ar">لا يستطيع السعال أو الكلام أو التنفّس (أو يمسك حلقه). هذه حالة طارئة!</span></div>
+        </div>
+        <div class="steps-title">👉 <span class="en">If they can't breathe — get help &amp; act</span><span class="ar">إذا لم يستطع التنفّس — اطلب المساعدة وتصرّف</span></div>
+        <ol class="steps">
+          <li><span class="en">Yell for a grown-up and have someone call <b>911</b> right now.</span><span class="ar">نادِ شخصًا بالغًا بصوتٍ عالٍ واطلب من أحدهم الاتصال بالطوارئ (<b>911</b>) الآن.</span></li>
+          <li><span class="en">If you've been taught how: give <b>5 back blows</b> between the shoulder blades with the heel of your hand.</span><span class="ar">إن كنت قد تعلّمت كيف: وجّه <b>٥ ضربات على الظهر</b> بين لوحَي الكتف بكعب يدك.</span></li>
+          <li><span class="en">Then give <b>5 belly thrusts</b> — hands just above the belly button, pull in and up.</span><span class="ar">ثم <b>٥ ضغطات على البطن</b> — اليدان فوق السرّة مباشرة، اسحب للداخل وللأعلى.</span></li>
+          <li><span class="en">Keep switching — 5 back blows, 5 belly thrusts — until the object pops out or help arrives.</span><span class="ar">بدّل باستمرار — ٥ ضربات ظهر، ٥ ضغطات بطن — حتى يخرج الجسم أو تصل المساعدة.</span></li>
+        </ol>
+        <div class="alert">
+          <div class="lbl">🛑 <span class="en">The #1 rule</span><span class="ar">القاعدة الأهم</span></div>
+          <p><span class="en">Always get a grown-up immediately — choking is a real emergency. The most important thing YOU can do is get an adult fast and call 911. Belly thrusts are for kids and grown-ups, <b>never for babies</b> — a grown-up must help a choking baby.</span><span class="ar">اطلب دائمًا شخصًا بالغًا فورًا — الاختناق حالة طارئة حقيقيّة. أهمّ ما يمكنك فعله هو إحضار شخص بالغ بسرعة والاتصال بالطوارئ (911). ضغطات البطن للأطفال والكبار، <b>وليست أبدًا للرضّع</b> — يجب أن يساعد شخص بالغ الرضيع المختنق.</span></p>
+        </div>
+      </div>
+    </article>
+
+    <!-- FEVER -->
+    <article class="topic" id="fever" data-c="fever">
+      <div class="topic-head c-fever">
+        <div class="ic" aria-hidden="true">🌡️</div>
+        <div><h3><span class="en">Temperature &amp; Fevers</span><span class="ar">الحرارة والحُمّى</span></h3>
+        <div class="whatis"><span class="en">A fever is when your body gets warmer than normal (normal is about 98.6°F / 37°C).</span><span class="ar">الحُمّى هي أن يصبح جسمك أدفأ من المعتاد (المعتاد نحو ٣٧ مئوية / 98.6°F).</span></div></div>
+      </div>
+      <div class="topic-body">
+        <div class="steps-title">👉 <span class="en">What to do</span><span class="ar">ماذا تفعل؟</span></div>
+        <ol class="steps">
+          <li><span class="en">Tell a grown-up how you feel.</span><span class="ar">أخبر شخصًا بالغًا كيف تشعر.</span></li>
+          <li><span class="en">Rest and take it easy — your body is busy fighting germs.</span><span class="ar">استرِح وخذ الأمور بهدوء — جسمك مشغول بمحاربة الجراثيم.</span></li>
+          <li><span class="en">Sip lots of water and cool drinks.</span><span class="ar">اشرب كثيرًا من الماء والمشروبات الباردة.</span></li>
+          <li><span class="en">Wear light, comfy clothes — don't bundle up too much.</span><span class="ar">ارتدِ ملابس خفيفة ومريحة — لا تتغطَّ كثيرًا.</span></li>
+        </ol>
+        <div class="alert">
+          <div class="lbl">🛑 <span class="en">Get a grown-up if…</span><span class="ar">اطلب مساعدة شخص بالغ إذا…</span></div>
+          <p><span class="en">you feel really sick, the fever is very high, you're hard to wake up, you have trouble breathing, or a bad headache or stiff neck. A grown-up decides about any medicine — never take it on your own.</span><span class="ar">شعرت بمرض شديد، أو كانت الحرارة مرتفعة جدًّا، أو صعُب إيقاظك، أو واجهت صعوبة في التنفّس، أو صداع شديد أو تيبّس في الرقبة. الشخص البالغ يقرّر أمر الدواء — لا تتناوله بنفسك أبدًا.</span></p>
+        </div>
+        <div class="note"><b><span class="en">Cool fact:</span><span class="ar">معلومة ممتعة:</span></b> <span class="en">A fever is your body turning up the heat to help win the battle against germs. A thermometer measures how warm you are.</span><span class="ar">الحُمّى هي رفع جسمك لحرارته ليفوز في معركته ضدّ الجراثيم. ميزان الحرارة يقيس مدى دفئك.</span></div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- ALWAYS BOX -->
+  <section class="always" aria-labelledby="always-h">
+    <h2 id="always-h">⭐ <span class="en">ALWAYS get a grown-up right away if you see…</span><span class="ar">اطلب دائمًا شخصًا بالغًا فورًا إذا رأيت…</span></h2>
+    <ul>
+      <li><span class="en">Someone who can't breathe, is choking, or won't wake up</span><span class="ar">شخصًا لا يستطيع التنفّس أو يختنق أو لا يستيقظ</span></li>
+      <li><span class="en">Bleeding that won't stop</span><span class="ar">نزيفًا لا يتوقّف</span></li>
+      <li><span class="en">A burn from fire, chemicals, or electricity — or a big burn</span><span class="ar">حرقًا من نار أو مواد كيميائية أو كهرباء — أو حرقًا كبيرًا</span></li>
+      <li><span class="en">A hard hit to the head, or a bone that looks bent or broken</span><span class="ar">ضربة قويّة على الرأس، أو عظمًا يبدو معوجًّا أو مكسورًا</span></li>
+      <li><span class="en">Anyone who seems very sick or very scared</span><span class="ar">أيّ شخص يبدو مريضًا جدًّا أو خائفًا جدًّا</span></li>
+    </ul>
+    <p class="big"><span class="en">When it's big, call 911. You are never in trouble for getting help.</span><span class="ar">عندما تكون الحالة كبيرة، اتصل بالطوارئ (911). لن تقع في مشكلة أبدًا بسبب طلب المساعدة.</span></p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="disclaim"><span class="en">This guide teaches first aid <b>basics</b> so you can be a great helper. It does not replace a grown-up, a nurse, or a doctor. In a real emergency, always get an adult and call 911 (or your local emergency number).</span><span class="ar">يُعلّم هذا الدليل <b>أساسيات</b> الإسعافات الأوّليّة لتكون مُساعِدًا رائعًا. وهو لا يُغني عن شخص بالغ أو ممرّض أو طبيب. في أيّ حالة طارئة حقيقيّة، اطلب دائمًا شخصًا بالغًا واتصل بالطوارئ (911).</span></div>
+    <p class="heart"><span class="en">You're a First Aid Hero! ❤️</span><span class="ar">أنت بطل إسعافات أوّليّة! ❤️</span></p>
+    <a class="totop" href="#top" onclick="window.scrollTo({top:0});return false;"><span class="en">↑ Back to top</span><span class="ar">↑ العودة إلى الأعلى</span></a>
+  </div>
+</footer>
+
+<script>
+  function setLang(l){
+    var html = document.documentElement;
+    html.setAttribute('lang', l);
+    html.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr');
+    html.classList.toggle('ar-active', l === 'ar');
+    var btns = document.querySelectorAll('[data-setlang]');
+    for (var i = 0; i < btns.length; i++){
+      btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-setlang') === l ? 'true' : 'false');
+    }
+    try { localStorage.setItem('fah-lang', l); } catch(e) {}
+  }
+  (function(){
+    var l = 'en';
+    var browserAr = (navigator.language || '').slice(0,2).toLowerCase() === 'ar';
+    try {
+      var saved = localStorage.getItem('fah-lang');
+      if (saved === 'ar' || saved === 'en') l = saved;
+      else if (browserAr) l = 'ar';
+    } catch(e) { if (browserAr) l = 'ar'; }
+    try {
+      var p = new URLSearchParams(location.search).get('lang');
+      if (p === 'ar' || p === 'en') l = p;
+    } catch(e) {}
+    setLang(l);
+  })();
+</script>
+
+</body>
+</html>
